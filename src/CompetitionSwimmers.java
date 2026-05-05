@@ -1,23 +1,25 @@
+import enums.Discipline;
+
 import java.util.ArrayList;
 
 public class CompetitionSwimmers {
     private Coach coach;
-    private ArrayList<Disciplin> disciplins;
+    private ArrayList<Discipline> disciplines;
     private ArrayList<TrainingResult> trainingResults;
     private ArrayList<CompetitionResult> competitionResults;
 
 
     public class CompetitionSwimmers (){
         this.coach = coach;
-        this.disciplins = new ArrayList<>();
+        this.disciplines = new ArrayList<>();
         this.trainingResults = new ArrayList<>();
         this.competitionResults = new ArrayList<>();
     }
 
 
-    public void addDisciplin(Disciplin disciplin){
-        if(!disciplins.contains(disciplin)){
-            disciplins.add(disciplin);
+    public void addDisciplin(Discipline discipline){
+        if(!disciplines.contains(discipline)){
+            disciplines.add(discipline);
         }
     }
 
@@ -32,11 +34,11 @@ public class CompetitionSwimmers {
     }
 
 
-    public TraingResult getBestTrainingResult(Disciplin disciplin) {
+    public TraingResult getBestTrainingResult(Discipline discipline) {
         TraningsResult best = null;
 
         for (TraningResult result : trainingResults) {
-            if (result.getDisciplin() == disciplin) {
+            if (result.getDiscipline() == disciplin) {
                 if (best == null || result.getTime() < best.getTime()) {
                     best = result;
                 }
@@ -49,7 +51,7 @@ public class CompetitionSwimmers {
     public String toString(){
         return "COMPETITION SWIMMER: " +
                 "\n Coach: " + coach +
-                "\n Disciplin: " + disciplins +
+                "\n Disciplin: " + disciplines +
                 "\n TrainingResult: " + trainingResults +
                 "\n CompetitionResult: " + competitionResults;
 
