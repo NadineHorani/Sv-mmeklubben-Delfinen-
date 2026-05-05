@@ -2,7 +2,7 @@ import enums.Discipline;
 
 import java.util.ArrayList;
 
-public class CompetitionSwimmers {
+public class CompetitionSwimmer {
     private Coach coach;
     private ArrayList<Discipline> disciplines;
     private ArrayList<TrainingResult> trainingResults;
