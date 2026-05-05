@@ -2,18 +2,22 @@ import enums.Discipline;
 
 import java.util.ArrayList;
 
-public class CompetitionSwimmer {
+public class CompetitionSwimmer extends Member {
     private Coach coach;
     private ArrayList<Discipline> disciplines;
     private ArrayList<TrainingResult> trainingResults;
     private ArrayList<CompetitionResult> competitionResults;
 
 
-    public class CompetitionSwimmers (){
-        this.coach = coach;
+    public CompetitionSwimmer (){
+        super();
         this.disciplines = new ArrayList<>();
         this.trainingResults = new ArrayList<>();
         this.competitionResults = new ArrayList<>();
+    }
+
+    public void addCoach(Coach coach){
+        this.coach = coach;
     }
 
 
@@ -34,11 +38,11 @@ public class CompetitionSwimmer {
     }
 
 
-    public TraingResult getBestTrainingResult(Discipline discipline) {
-        TraningsResult best = null;
+    public TrainingResult getBestTrainingResult(Discipline discipline) {
+        TrainingResult best = null;
 
-        for (TraningResult result : trainingResults) {
-            if (result.getDiscipline() == disciplin) {
+        for (TrainingResult result : trainingResults) {
+            if (result.getDiscipline() == discipline) {
                 if (best == null || result.getTime() < best.getTime()) {
                     best = result;
                 }

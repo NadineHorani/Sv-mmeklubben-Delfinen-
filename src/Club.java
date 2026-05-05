@@ -1,3 +1,6 @@
+import enums.AgeCategory;
+import enums.Discipline;
+
 import java.util.ArrayList;
 
 public class Club {
@@ -59,7 +62,7 @@ public class Club {
     public int getTotalExpectedFee() {
         int total = 0;
 
-        for (member m : members) {
+        for (Member m : members) {
             total += m.calculateFee();
         }
         return total;
@@ -77,7 +80,7 @@ public class Club {
     public ArrayList<CompetitionSwimmer> getTop5s(Discipline discipline, AgeCategory category) {
         ArrayList<CompetitionSwimmer> result = new ArrayList<>();
 
-        for (competitionSwimmer s : competitionSwimmers) {
+        for (CompetitionSwimmer s : competitionSwimmers) {
             if (s.getAgeCategory() == category &&
                     s.getBestTrainingResult(discipline) != null) {
 
