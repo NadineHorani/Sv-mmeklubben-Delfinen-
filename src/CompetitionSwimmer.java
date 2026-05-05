@@ -17,7 +17,7 @@ public class CompetitionSwimmer {
     }
 
 
-    public void addDisciplin(Discipline discipline){
+    public void addDiscipline(Discipline discipline){
         if(!disciplines.contains(discipline)){
             disciplines.add(discipline);
         }
@@ -38,7 +38,7 @@ public class CompetitionSwimmer {
         TraningsResult best = null;
 
         for (TraningResult result : trainingResults) {
-            if (result.getDiscipline() == disciplin) {
+            if (result.getDiscipline() == discipline) {
                 if (best == null || result.getTime() < best.getTime()) {
                     best = result;
                 }
