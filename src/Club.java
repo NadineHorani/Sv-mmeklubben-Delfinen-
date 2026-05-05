@@ -38,7 +38,7 @@ public class Club {
 
     public Coach findCoach(int coachId) {
         for (Coach c : coaches) {
-            if (c.getCoachId() == coachId) {
+            if (c.getCoachID() == coachId) {
                 return c;
             }
         }

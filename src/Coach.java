@@ -17,6 +17,11 @@ public class Coach {
 
     }
 
+    public int getCoachID(){
+        return coachID;
+    }
+
+
     public void addSwimmer(CompetitionSwimmer swimmer){
         swimmers.add(swimmer);
     }
