@@ -30,7 +30,7 @@ public class CompetitionSwimmer {
 
 
     public void addCompetitionResult(CompetitionResult result){
-        CompetitionResults.add(result);
+        competitionResults.add(result);
     }
 
 
