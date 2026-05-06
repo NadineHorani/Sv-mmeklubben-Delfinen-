@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class TrainingResult extends SwimResult {
 
+
     public TrainingResult(Discipline discipline, double time, LocalDate date){
         super(discipline,time,date);
     }

@@ -60,5 +60,4 @@ public class CompetitionSwimmer extends Member {
                 "\n CompetitionResult: " + competitionResults;
 
     }
-
 }
