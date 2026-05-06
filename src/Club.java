@@ -77,22 +77,26 @@ public class Club {
         }
     }
 
-    public ArrayList<CompetitionSwimmer> getTop5s(Discipline discipline, AgeCategory category) {
+    public String getTop5s(Discipline discipline, AgeCategory category) {
+        StringBuilder sb = new StringBuilder();
         ArrayList<CompetitionSwimmer> result = new ArrayList<>();
 
-        for (CompetitionSwimmer s : competitionSwimmers) {
-            if (s.getAgeCategory() == category &&
-                    s.getBestTrainingResult(discipline) != null) {
-
+        for (CompetitionSwimmer s : competitionSwimmers) { //alle objekter der matcher agecategori og som
+            if (s.getAgeCategory() == category &&  // har en personlig rekord i disciplinen bliver tilføjet til ny liste
+                    s.getPersonalRecord(discipline) != null) { // forhindrer crash og
+                                                                // sikrer at objektet har en pr i den givne disciplin
                 result.add(s);
             }
         }
+        result.sort(new CompetitionSwimmerComparator(discipline));
 
-        ArrayList<CompetitionSwimmer> top5 = new ArrayList<>();
-        for (int i = 0; i < result.size() && i < 5; i++) {
-            top5.add(result.get(i));
+        sb.append("TOP 5 ").append(discipline).append(" - ").append(category).append("\n___________________________\n");
+
+        for (int i = 0; i < result.size() && i < 5; i++){
+            sb.append(result.get(i).getName()).append(" ").append(result.get(i).getPersonalRecord(discipline)).append("\n");
         }
-        return top5;
+
+        return sb.toString();
     }
 
     public String toString() {

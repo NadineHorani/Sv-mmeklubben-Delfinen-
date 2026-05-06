@@ -2,6 +2,7 @@ import enums.Discipline;
 import enums.MemberType;
 import enums.MembershipStatus;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CompetitionSwimmer extends Member {
@@ -23,6 +24,10 @@ public class CompetitionSwimmer extends Member {
         this.coach = coach;
     }
 
+    @Override
+    public String getName() {
+        return super.getName();
+    }
 
     public void addDisciplin(Discipline discipline){
         if(!disciplines.contains(discipline)){
@@ -54,6 +59,30 @@ public class CompetitionSwimmer extends Member {
         return best;
     }
 
+    public SwimResult getPersonalRecord(Discipline discipline){
+        SwimResult best = null;
+
+        for (SwimResult result : trainingResults) {
+            if (result.getDiscipline() == discipline) {
+                if (best == null || result.getTime() < best.getTime()) {
+                    best = result;
+                }
+            }
+        }
+
+        for (SwimResult result : competitionResults){
+            if (result.getDiscipline() == discipline) {
+                if (best == null || result.getTime() < best.getTime()) {
+                    best = result;
+                }
+            }
+        }
+        return best;
+    }
+
+
+//get PR
+    //compare to o.get PR
 
     public String toString(){
         return "COMPETITION SWIMMER: " +
@@ -63,4 +92,6 @@ public class CompetitionSwimmer extends Member {
                 "\n CompetitionResult: " + competitionResults;
 
     }
+
+
 }

@@ -33,6 +33,10 @@ public class Member {
         return memberId;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public AgeCategory getAgeCategory() {
         if (age >= 18) {
             return AgeCategory.SENIOR;

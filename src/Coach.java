@@ -8,7 +8,7 @@ public class Coach {
     private ArrayList<CompetitionSwimmer> swimmers;
 
 
-    public class Coach(String name, int phone, String email, int coachID){
+    public Coach(String name, int phone, String email, int coachID){
         this.name = name;
         this.phone = phone;
         this.email = email;

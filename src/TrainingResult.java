@@ -12,9 +12,10 @@ public class TrainingResult extends SwimResult {
 
     public String toString(){
         return String.format("""
-                Discipline: %s
-                Time: %.2f
-                Date: %s""",getDiscipline(),getTime(),getDate());
+                TRAINING RESULT:
+                 Discipline: %s
+                 Time: %.2f sec
+                 Date: %s""",getDiscipline(),getTime(),getDate());
     }
 
 }

@@ -24,8 +24,8 @@ public class CompetitionResult extends SwimResult {
     public String toString(){
         return "COMPETITION RESULT:" +
                 "\n Descipline: " + getDiscipline() +
-                "\n Time: " + getTime() +
-                "\n Date: " + getTime() +
+                "\n Time: " + getTime() + " sec" +
+                "\n Date: " + getDate() +
                 "\n Name: " + getName() +
                 "\n Placement: " + getPlacement();
     }
