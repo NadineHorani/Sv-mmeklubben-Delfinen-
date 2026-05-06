@@ -10,7 +10,7 @@ public class Club {
     private ArrayList<CompetitionSwimmer> competitionSwimmers;
 
     public Club(String name) {
-        this.name = new;
+        this.name = name;
         this.members = new ArrayList<>();
         this.coaches = new ArrayList<>();
         this.competitionSwimmers = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Club {
         ArrayList<Member> debtors = new ArrayList<>();
 
         for (Member m : members) {
-            if (!m.hasPaid()) {
+            if (m.isInDebt()) {
                 debtors.add(m);
             }
         }

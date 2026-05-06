@@ -1,4 +1,6 @@
 import enums.Discipline;
+import enums.MemberType;
+import enums.MembershipStatus;
 
 import java.util.ArrayList;
 
@@ -9,8 +11,9 @@ public class CompetitionSwimmer extends Member {
     private ArrayList<CompetitionResult> competitionResults;
 
 
-    public CompetitionSwimmer (){
-        super();
+    public CompetitionSwimmer (String name, String address, String email, String phoneNumber, int age, int memberId, MembershipStatus status,
+                               MemberType memberType){
+        super(name, address, email, phoneNumber, age, memberId, status, memberType);
         this.disciplines = new ArrayList<>();
         this.trainingResults = new ArrayList<>();
         this.competitionResults = new ArrayList<>();

@@ -29,6 +29,10 @@ public class Member {
 
     }
 
+    public int getMemberId(){
+        return memberId;
+    }
+
     public AgeCategory getAgeCategory() {
         if (age >= 18) {
             return AgeCategory.SENIOR;
