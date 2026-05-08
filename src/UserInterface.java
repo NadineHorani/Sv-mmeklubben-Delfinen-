@@ -23,7 +23,7 @@ public class UserInterface {
                       HOVEDMENU
                     1. Formand
                     2. Træner
-                    3. Kassere"
+                    3. Kassere
                     4. Afslut""");
 
             int choice = Integer.parseInt(scanner.nextLine());
