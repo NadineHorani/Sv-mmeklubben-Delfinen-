@@ -1,14 +1,22 @@
+package model;
+
 import java.time.LocalDate;
 
 public class Payment {
 
-    private double amount;
+//    private double amount;
     private LocalDate paymentDate;
     private boolean isPaid;
+    private Member member;
 
-    public Payment(double amount) {
-        this.amount = amount;
+    public Payment(Member member) {
+        this.member = member;
+//        this.amount = member.calculateFee();
         this.isPaid = false;
+    }
+
+    public Member getMember(){
+        return member;
     }
 
     public void markAsPaid() {
@@ -16,9 +24,6 @@ public class Payment {
         this.paymentDate = LocalDate.now();
     }
 
-    public double getAmount() {
-        return amount;
-    }
 
     public LocalDate getPaymentDate() {
         return paymentDate;
@@ -31,9 +36,9 @@ public class Payment {
     @Override
     public String toString() {
         if (isPaid) {
-            return "Medlemmet har betalt" + amount + "d." + paymentDate;
+            return "Medlemmet har betalt" + member.calculateFee() + "d." + paymentDate;
         } else {
-            return "Medlemmet har endnu ikke indbetalt kontingent. Beløb:" + amount;
+            return "Medlemmet har endnu ikke indbetalt kontingent. Beløb:" + member.calculateFee();
         }
     }
 }

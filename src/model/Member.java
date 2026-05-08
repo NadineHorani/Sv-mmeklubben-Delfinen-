@@ -1,6 +1,8 @@
-import enums.AgeCategory;
-import enums.MemberType;
-import enums.MembershipStatus;
+package model;
+
+import model.enums.AgeCategory;
+import model.enums.MemberType;
+import model.enums.MembershipStatus;
 
 import java.util.ArrayList;
 
@@ -13,7 +15,6 @@ public class Member {
     private int memberId;
     private MembershipStatus status;
     private MemberType memberType;
-    private ArrayList<Payment> payments;
 
     public Member(String name, String address, String email, String phoneNumber, int age, int memberId, MembershipStatus status,
                   MemberType memberType) {
@@ -25,7 +26,6 @@ public class Member {
         this.memberId = memberId;
         this.status = status;
         this.memberType = memberType;
-        this.payments = new ArrayList<>();
 
     }
 
@@ -44,18 +44,8 @@ public class Member {
         return AgeCategory.JUNIOR;
     }
 
-    public void addPayment(Payment payment) {
-        payments.add(payment);
-    }
 
-    public boolean isInDebt() {
-        for (Payment payment : payments) {
-            if (!payment.isPaid()) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     public MembershipStatus getStatus() {
         return status;

@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 
 public class Coach {
@@ -35,7 +37,7 @@ public class Coach {
                 "\n Name: " + name +
                 "\n Phone number: " + phone +
                 "\n Email: " + email +
-                "\n Coach ID: " + coachID +
+                "\n model.Coach ID: " + coachID +
                 "\n Swimmers: " + swimmers;
     }
 

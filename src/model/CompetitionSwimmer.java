@@ -1,8 +1,9 @@
-import enums.Discipline;
-import enums.MemberType;
-import enums.MembershipStatus;
+package model;
 
-import java.lang.reflect.Array;
+import model.enums.Discipline;
+import model.enums.MemberType;
+import model.enums.MembershipStatus;
+
 import java.util.ArrayList;
 
 public class CompetitionSwimmer extends Member {
@@ -63,9 +64,9 @@ public class CompetitionSwimmer extends Member {
         SwimResult best = null;
 
         for (SwimResult result : trainingResults) {
-            if (result.getDiscipline() == discipline) {
-                if (best == null || result.getTime() < best.getTime()) {
-                    best = result;
+            if (result.getDiscipline() == discipline) { //filter der finder den valgte disciplin
+                if (best == null || result.getTime() < best.getTime()) {  //sikrer at best ikke bliver null
+                    best = result;                               //hvis svømmeren har et resultat i den valgte disciplin
                 }
             }
         }
@@ -81,15 +82,13 @@ public class CompetitionSwimmer extends Member {
     }
 
 
-//get PR
-    //compare to o.get PR
 
     public String toString(){
         return "COMPETITION SWIMMER: " +
-                "\n Coach: " + coach +
+                "\n model.Coach: " + coach +
                 "\n Disciplin: " + disciplines +
-                "\n TrainingResult: " + trainingResults +
-                "\n CompetitionResult: " + competitionResults;
+                "\n model.TrainingResult: " + trainingResults +
+                "\n model.CompetitionResult: " + competitionResults;
 
     }
 

@@ -1,7 +1,8 @@
-import enums.AgeCategory;
-import enums.Discipline;
-import enums.MemberType;
-import enums.MembershipStatus;
+import model.*;
+import model.enums.AgeCategory;
+import model.enums.Discipline;
+import model.enums.MemberType;
+import model.enums.MembershipStatus;
 
 import java.time.LocalDate;
 
@@ -16,11 +17,13 @@ public class Main {
         club.addCoach(coach1);
         club.addCoach(coach2);
 
+
         // Oprindelige svømmere
         CompetitionSwimmer swimmer1 = new CompetitionSwimmer("Mikkel Hansen", "København", "mikkel@mail.dk", "12345678", 18, 1, MembershipStatus.ACTIVE, MemberType.COMPETITION);
 
         CompetitionSwimmer swimmer2 = new CompetitionSwimmer("Sofie Nielsen", "Aarhus", "sofie@mail.dk", "87654321", 20, 2, MembershipStatus.ACTIVE, MemberType.COMPETITION);
-
+        club.addMember(swimmer1);
+        club.addMember(swimmer2);
         swimmer1.addCoach(coach1);
         swimmer2.addCoach(coach2);
 
@@ -33,7 +36,7 @@ public class Main {
         swimmer1.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 52.1, LocalDate.of(2026, 5, 4), "DM 2026", 1));
 
         swimmer2.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 57.0, LocalDate.of(2026, 5, 4), "DM 2026", 2));
-        swimmer2.addTrainingResult(new TrainingResult(Discipline.BACKSTROKE,23,LocalDate.of(2025,3,10)));
+        swimmer2.addTrainingResult(new TrainingResult(Discipline.BACKSTROKE, 23, LocalDate.of(2025, 3, 10)));
 
         // 10 ekstra svømmere
         CompetitionSwimmer swimmer3 = new CompetitionSwimmer("Jonas Berg", "Odense", "jonas@mail.dk", "11111111", 25, 3, MembershipStatus.ACTIVE, MemberType.COMPETITION);
@@ -48,30 +51,30 @@ public class Main {
         CompetitionSwimmer swimmer12 = new CompetitionSwimmer("Ida Nørgaard", "Silkeborg", "ida@mail.dk", "10101010", 23, 12, MembershipStatus.ACTIVE, MemberType.COMPETITION);
 
         // BACKSTROKE resultater
-        swimmer3.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 54.3, LocalDate.of(2026,10,2), "DM 2026", 2));
-        swimmer4.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 51.9, LocalDate.of(2026,1,9), "DM 2026", 1));
-        swimmer5.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 60.2, LocalDate.of(2026,6,4), "DM 2026", 5));
-        swimmer6.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 56.7, LocalDate.of(2026,3,2), "DM 2026", 3));
-        swimmer7.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 53.5, LocalDate.of(2026,5,7), "DM 2026", 2));
-        swimmer8.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 58.9, LocalDate.of(2026,5,4), "DM 2026", 4));
-        swimmer9.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 52.8, LocalDate.of(2026,7,2), "DM 2026", 1));
-        swimmer10.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 61.0, LocalDate.of(2026,5,1), "DM 2026", 6));
-        swimmer11.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 55.1, LocalDate.of(2026,2,10), "DM 2026", 3));
-        swimmer12.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 57.4, LocalDate.of(2026,8,11), "DM 2026", 4));
+        swimmer3.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 54.3, LocalDate.of(2026, 10, 2), "DM 2026", 2));
+        swimmer4.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 51.9, LocalDate.of(2026, 1, 9), "DM 2026", 1));
+        swimmer5.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 60.2, LocalDate.of(2026, 6, 4), "DM 2026", 5));
+        swimmer6.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 56.7, LocalDate.of(2026, 3, 2), "DM 2026", 3));
+        swimmer7.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 53.5, LocalDate.of(2026, 5, 7), "DM 2026", 2));
+        swimmer8.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 58.9, LocalDate.of(2026, 5, 4), "DM 2026", 4));
+        swimmer9.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 52.8, LocalDate.of(2026, 7, 2), "DM 2026", 1));
+        swimmer10.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 61.0, LocalDate.of(2026, 5, 1), "DM 2026", 6));
+        swimmer11.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 55.1, LocalDate.of(2026, 2, 10), "DM 2026", 3));
+        swimmer12.addCompetitionResult(new CompetitionResult(Discipline.BACKSTROKE, 57.4, LocalDate.of(2026, 8, 11), "DM 2026", 4));
 
         // Tilføj alle til klub
-        club.addCompetitionSwimmer(swimmer1);
-        club.addCompetitionSwimmer(swimmer2);
-        club.addCompetitionSwimmer(swimmer3);
-        club.addCompetitionSwimmer(swimmer4);
-        club.addCompetitionSwimmer(swimmer5);
-        club.addCompetitionSwimmer(swimmer6);
-        club.addCompetitionSwimmer(swimmer7);
-        club.addCompetitionSwimmer(swimmer8);
-        club.addCompetitionSwimmer(swimmer9);
-        club.addCompetitionSwimmer(swimmer10);
-        club.addCompetitionSwimmer(swimmer11);
-        club.addCompetitionSwimmer(swimmer12);
+        club.addMember(swimmer1);
+        club.addMember(swimmer2);
+        club.addMember(swimmer3);
+        club.addMember(swimmer4);
+        club.addMember(swimmer5);
+        club.addMember(swimmer6);
+        club.addMember(swimmer7);
+        club.addMember(swimmer8);
+        club.addMember(swimmer9);
+        club.addMember(swimmer10);
+        club.addMember(swimmer11);
+        club.addMember(swimmer12);
 
         // TEST
         System.out.println(club.getTop5s(Discipline.BACKSTROKE, AgeCategory.SENIOR));

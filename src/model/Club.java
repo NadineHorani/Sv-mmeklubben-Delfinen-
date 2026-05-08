@@ -1,29 +1,29 @@
-import enums.AgeCategory;
-import enums.Discipline;
+package model;
 
+import model.enums.AgeCategory;
+import model.enums.Discipline;
+
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Club {
     private String name;
     private ArrayList<Member> members;
     private ArrayList<Coach> coaches;
-    private ArrayList<CompetitionSwimmer> competitionSwimmers;
+    private ArrayList<Payment> payments;
 
     public Club(String name) {
         this.name = name;
         this.members = new ArrayList<>();
         this.coaches = new ArrayList<>();
-        this.competitionSwimmers = new ArrayList<>();
+        this.payments = new ArrayList<>();
     }
 
     public void addMember(Member member) {
         members.add(member);
     }
 
-    public void addCompetitionSwimmer(CompetitionSwimmer swimmer) {
-        competitionSwimmers.add(swimmer);
-        members.add(swimmer);
-    }
 
     public Member findMember(int memberId) {
         for (Member m : members) {
@@ -48,12 +48,14 @@ public class Club {
         return null;
     }
 
+
+
     public ArrayList<Member> getDebtors() {
         ArrayList<Member> debtors = new ArrayList<>();
 
-        for (Member m : members) {
-            if (m.isInDebt()) {
-                debtors.add(m);
+        for (Payment payment : payments) {
+            if (!payment.isPaid()) {
+                debtors.add(payment.getMember());
             }
         }
         return debtors;
@@ -68,23 +70,27 @@ public class Club {
         return total;
     }
 
-    public void registerPayment(int memberID, Payment payment) {
-        Member m = findMember(memberID);
 
-        if (m != null) {
-            m.addPayment(payment);
+    public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {
+        ArrayList<CompetitionSwimmer> competitionSwimmerArrayList = new ArrayList<>();
 
+        for (Member member : members) {
+            if (member instanceof CompetitionSwimmer) {
+                competitionSwimmerArrayList.add((CompetitionSwimmer) member);
+            }
         }
+        return competitionSwimmerArrayList;
     }
+
 
     public String getTop5s(Discipline discipline, AgeCategory category) {
         StringBuilder sb = new StringBuilder();
         ArrayList<CompetitionSwimmer> result = new ArrayList<>();
 
-        for (CompetitionSwimmer s : competitionSwimmers) { //alle objekter der matcher agecategori og som
+        for (CompetitionSwimmer s : getCompetitionSwimmers()) { //alle objekter der matcher agecategori og som
             if (s.getAgeCategory() == category &&  // har en personlig rekord i disciplinen bliver tilføjet til ny liste
                     s.getPersonalRecord(discipline) != null) { // forhindrer crash og
-                                                                // sikrer at objektet har en pr i den givne disciplin
+                // sikrer at objektet har en pr i den givne disciplin
                 result.add(s);
             }
         }
@@ -92,7 +98,7 @@ public class Club {
 
         sb.append("TOP 5 ").append(discipline).append(" - ").append(category).append("\n___________________________\n");
 
-        for (int i = 0; i < result.size() && i < 5; i++){
+        for (int i = 0; i < result.size() && i < 5; i++) {
             sb.append(result.get(i).getName()).append(" ").append(result.get(i).getPersonalRecord(discipline)).append("\n");
         }
 
@@ -100,9 +106,9 @@ public class Club {
     }
 
     public String toString() {
-        return "Club: " + name +
+        return "model.Club: " + name +
                 "\nMembers: " + members.size() +
                 "\nCoaches: " + coaches.size() +
-                "\nCompetition swimmers: " + competitionSwimmers.size();
+                "\nCompetition swimmers: " + getCompetitionSwimmers().size();
     }
 }
