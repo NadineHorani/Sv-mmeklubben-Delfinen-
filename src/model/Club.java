@@ -22,6 +22,18 @@ public class Club {
 
     public void addMember(Member member) {
         members.add(member);
+        payments.add(new Payment(member));
+    }
+
+    public void registerPayment(int memberId) {
+
+        for (Payment payment : payments) {
+
+            if (payment.getMember().getMemberId() == memberId) {
+                payment.markAsPaid();
+                return;
+            }
+        }
     }
 
 
@@ -47,8 +59,6 @@ public class Club {
         }
         return null;
     }
-
-
 
     public ArrayList<Member> getDebtors() {
         ArrayList<Member> debtors = new ArrayList<>();

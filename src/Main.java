@@ -76,6 +76,8 @@ public class Main {
         club.addMember(swimmer11);
         club.addMember(swimmer12);
 
+
+
         // TEST
         System.out.println(club.getTop5s(Discipline.BACKSTROKE, AgeCategory.SENIOR));
     }
