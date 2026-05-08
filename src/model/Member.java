@@ -5,6 +5,7 @@ import model.enums.MemberType;
 import model.enums.MembershipStatus;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Member {
     private String name;
@@ -13,20 +14,20 @@ public class Member {
     private String phoneNumber;
     private int age;
     private int memberId;
+    private static int counter = 0;
     private MembershipStatus status;
     private MemberType memberType;
 
-    public Member(String name, String address, String email, String phoneNumber, int age, int memberId, MembershipStatus status,
-                  MemberType memberType) {
+    public Member(String name, String address, String email, String phoneNumber, int age, MemberType memberType) {
+        counter++;
         this.name = name;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
-        this.memberId = memberId;
-        this.status = status;
+        this.memberId = counter;
+        this.status = MembershipStatus.ACTIVE;
         this.memberType = memberType;
-
     }
 
     public int getMemberId(){
@@ -55,6 +56,21 @@ public class Member {
 
     public MembershipStatus getStatus() {
         return status;
+    }
+
+    public void changeStatus(){
+        if (this.getStatus() == MembershipStatus.PASSIVE){
+            status = MembershipStatus.ACTIVE;
+        } else {
+            status = MembershipStatus.PASSIVE;
+        }
+    }
+
+    public MembershipStatus getOppositeStatus(){
+        if (this.getStatus() == MembershipStatus.PASSIVE){
+            return MembershipStatus.ACTIVE;
+        }
+        return MembershipStatus.PASSIVE;
     }
 
     public int calculateFee() {
