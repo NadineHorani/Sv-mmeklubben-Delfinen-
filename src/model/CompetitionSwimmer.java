@@ -15,7 +15,7 @@ public class CompetitionSwimmer extends Member {
 
     public CompetitionSwimmer (String name, String address, String email, String phoneNumber, int age, int memberId, MembershipStatus status,
                                MemberType memberType){
-        super(name, address, email, phoneNumber, age, memberId, status, memberType);
+        super(name, address, email, phoneNumber, age, memberType);
         this.disciplines = new ArrayList<>();
         this.trainingResults = new ArrayList<>();
         this.competitionResults = new ArrayList<>();
