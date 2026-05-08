@@ -4,14 +4,12 @@ import java.time.LocalDate;
 
 public class Payment {
 
-//    private double amount;
     private LocalDate paymentDate;
     private boolean isPaid;
     private Member member;
 
     public Payment(Member member) {
         this.member = member;
-//        this.amount = member.calculateFee();
         this.isPaid = false;
     }
 
