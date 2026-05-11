@@ -16,7 +16,7 @@ public class TrainingResult extends SwimResult {
         return String.format("""
                 TRAINING RESULT:
                  Discipline: %s
-                 Time: %.2f sec
+                 Time: %.2f sek
                  Date: %s""",getDiscipline(),getTime(),getDate());
     }
 
