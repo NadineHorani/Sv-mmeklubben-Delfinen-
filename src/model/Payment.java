@@ -13,36 +13,31 @@ public class Payment {
         this.isPaid = false;
     }
 
-    public Member getMember() {
+
+    public Member getMember(){
         return member;
     }
 
     public void markAsPaid() {
-        isPaid = true;
-        paymentDate = LocalDate.now();
+        this.isPaid = true;
+        this.paymentDate = LocalDate.now();
+    }
+
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
     }
 
     public boolean isPaid() {
         return isPaid;
     }
 
-    public LocalDate getPaymentDate() {
-        return paymentDate;
-    }
-
     @Override
     public String toString() {
-
         if (isPaid) {
-            return member.getName() +
-                    " har betalt " +
-                    member.calculateFee() +
-                    " kr. d. " + paymentDate;
+            return "Medlemmet har betalt" + member.calculateFee() + "d." + paymentDate;
+        } else {
+            return "Medlemmet har endnu ikke indbetalt kontingent. Beløb:" + member.calculateFee();
         }
-
-        return member.getName() +
-                " mangler at betale " +
-                member.calculateFee() +
-                " kr.";
     }
 }

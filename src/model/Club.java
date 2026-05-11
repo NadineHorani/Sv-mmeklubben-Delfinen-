@@ -22,18 +22,6 @@ public class Club {
 
     public void addMember(Member member) {
         members.add(member);
-        payments.add(new Payment(member));
-    }
-
-    public void registerPayment(int memberId) {
-
-        for (Payment payment : payments) {
-
-            if (payment.getMember().getMemberId() == memberId) {
-                payment.markAsPaid();
-                return;
-            }
-        }
     }
 
 
@@ -60,7 +48,24 @@ public class Club {
         return null;
     }
 
-    public ArrayList<Member> getDebtors() {
+    public void addPayment(Payment payment) {
+        payments.add(payment);
+    }
+
+    public String showMembers() {
+        StringBuilder sb = new StringBuilder();
+        for (Member m : members) {
+            sb.append(m.getName()).append("\nID: ").append(m.getMemberId()).append("\nALDER: ").append
+                            (m.getAge()).append("\nSTATUS: ").append(m.getStatus()).append("\nNIVEAU: ")
+                    .append(m.getMemberType()).append("\n\n");
+
+        }
+        return sb.toString();
+    }
+
+    public String getDebtors() {
+        StringBuilder sb = new StringBuilder();
+
         ArrayList<Member> debtors = new ArrayList<>();
 
         for (Payment payment : payments) {
@@ -68,7 +73,14 @@ public class Club {
                 debtors.add(payment.getMember());
             }
         }
-        return debtors;
+
+            for (Member m : debtors){
+                sb.append("MEDLEMSID: ").append(m.getMemberId()).append("\nNAVN: ").append(m.getName())
+                        .append("\nMANGLER AT BETALE: ").append(m.calculateFee()).append(" DKK\n\n");
+
+            }
+
+        return sb.toString();
     }
 
     public int getTotalExpectedFee() {
@@ -79,6 +91,17 @@ public class Club {
         }
         return total;
     }
+
+    public void registerPayment(int memberID) {
+
+            for (Payment payment : payments) {
+
+                if (payment.getMember().getMemberId() == memberID) {
+                    payment.markAsPaid();
+                    return;
+                }
+            }
+        }
 
 
     public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {

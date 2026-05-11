@@ -36,7 +36,7 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> formand();
                 case 2 -> træner();
-//                case 3 -> kassere();
+                case 3 -> kassere();
                 case 4 -> quit = true;
                 default -> System.out.println("Ugyldigt input");
             }
@@ -44,9 +44,8 @@ public class UserInterface {
         }
     }
 
-
     private void formand() {
-        System.out.println("1. OPRET NYT MEDLEM\n" + "2. OPDATER MEDLEMSSTATUS");
+        System.out.println("1. OPRET NYT MEDLEM\n" + "2. OPDATER MEDLEMSSTATUS\n3. SE ALLE MEDLEMMER");
         int choice = Integer.parseInt(scanner.nextLine());
         MemberType memberType;
         switch (choice) {
@@ -69,6 +68,8 @@ public class UserInterface {
                         Member member = new Member(name, adress, email, phonenumber, age, memberType);
                         club.addMember(member);
                         System.out.println("MEDLEM ER NU OPRETTET\n" + member + "\n");
+                        Payment payment = new Payment(member);
+                        club.addPayment(payment);
                         break;
                     } else if (answer == 2) {
                         memberType = MemberType.COMPETITION;
@@ -83,11 +84,16 @@ public class UserInterface {
                                 case 2 -> competitionSwimmer.addDisciplin(Discipline.CRAWL);
                                 case 3 -> competitionSwimmer.addDisciplin(Discipline.BACKSTROKE);
                                 case 4 -> competitionSwimmer.addDisciplin(Discipline.BREASTSTROKE);
-                                case 5 -> done = true;
+                                case 5 -> {
+                                    done = true;
+                                    break;
+                                }
                                 default -> System.out.println("UGYLDIGT INPUT");
                             }
                         }
                         System.out.println("MEDLEM ER NU OPRETTET\n" + competitionSwimmer + "\n");
+                        Payment payment = new Payment(competitionSwimmer);
+                        club.addPayment(payment);
                         break;
                     } else {
                         System.out.println("UGYLDIGT INPUT. PRØV IGEN");
@@ -114,6 +120,7 @@ public class UserInterface {
                 }
 
             }
+            case 3 -> System.out.println(club.showMembers());
             default -> System.out.println("UGYLDIGT INPUT");
         }
     }
@@ -131,11 +138,13 @@ public class UserInterface {
                         System.out.println("UGYLDIGT MEDLEMSID. PRØV IGEN");
                         id = Integer.parseInt(scanner.nextLine());
                         member = club.findMember(id);
+                    } else if (!(member instanceof CompetitionSwimmer)) {
+                        System.out.println("SYSTEMET KAN KUN REGISTRERE TIDER FOR KONKURRENCESVØMMERE");
+                        return;
                     } else {
                         break;
                     }
                 }
-
                 System.out.println("1. TRÆNINGSTID\n2. STÆVNETID");
                 int choice1 = Integer.parseInt(scanner.nextLine());
                 switch (choice1) {
@@ -165,9 +174,38 @@ public class UserInterface {
                         }
                         System.out.println("TRÆNINGSRESULTAT BLEV REGISTRERET KORREKT\n" + trainingResult);
                     }
+                    case 2 -> {
+                        Discipline discipline = null;
+                        System.out.println("1. BUTTERFLY\n2. CRAWL\n3. RYGCRAWL\n4. BRYSTSVØMNING");
+                        int choice2 = Integer.parseInt(scanner.nextLine());
+                        switch (choice2) {
+                            case 1 -> discipline = Discipline.BUTTERFLY;
+                            case 2 -> discipline = Discipline.CRAWL;
+                            case 3 -> discipline = Discipline.BACKSTROKE;
+                            case 4 -> discipline = Discipline.BREASTSTROKE;
+                        }
+                        System.out.println("INDTAST TIDSRESULTAT I SEKUNDER: ");
+                        int time = Integer.parseInt(scanner.nextLine());
+                        System.out.println("INDTAST DATO I TALFORMAT");
+                        System.out.println("ÅR: ");
+                        int year = Integer.parseInt(scanner.nextLine());
+                        System.out.println("MÅNED: ");
+                        int month = Integer.parseInt(scanner.nextLine());
+                        System.out.println("DAG: ");
+                        int day = Integer.parseInt(scanner.nextLine());
+                        LocalDate date = LocalDate.of(year, month, day);
+                        System.out.println("STÆVNE NAVN: ");
+                        String competetionName = scanner.nextLine();
+                        System.out.println("PLACERING PÅ RANGLISTE: ");
+                        int placement = Integer.parseInt(scanner.nextLine());
+                        CompetitionResult competitionResult = new CompetitionResult(discipline, time, date,
+                                competetionName, placement);
+                        if (member instanceof CompetitionSwimmer swimmer) {
+                            swimmer.addCompetitionResult(competitionResult);
+                        }
+                        System.out.println("STÆVNERESULTATET BLEV REGISTRERET KORREKT\n" + competitionResult);
+                    }
                 }
-
-
             }
             case 2 -> {
                 AgeCategory ageCategory = null;
@@ -192,5 +230,45 @@ public class UserInterface {
                 System.out.println(club.getTop5s(discipline, ageCategory));
             }
         }
+    }
+
+    private void kassere(){
+        System.out.println("""
+                1. REGISTRER BETALING
+                2. SAMLET FORVENTET INDKOMST
+                3. MEDLEMMER I RESTANCE""");
+
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        switch (choice){
+            case 1 -> {
+                Payment payment;
+                System.out.println("MEDELMS ID: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                Member member = club.findMember(id);
+                System.out.println("BELØB TIL BETALING: " + member.calculateFee() + "DKK");
+                System.out.println("1. BEKRÆFT BETALING\n2. ANNULLER BETALING");
+                int paymentChoice = Integer.parseInt(scanner.nextLine());
+                switch (paymentChoice){
+                    case 1 -> {
+                        club.registerPayment(id);
+                        System.out.println("BETALING BEKRÆFTET");
+                    }
+                    case 2 -> {
+                        return;
+                    }
+                }
+
+            }
+            case 2 -> System.out.println(club.getTotalExpectedFee() + " DKK");
+
+            case 3 -> {
+                System.out.println(club.getDebtors());
+            }
+
+            default -> System.out.println("UGYLDIGT INPUT");
+        }
+
+
     }
 }
