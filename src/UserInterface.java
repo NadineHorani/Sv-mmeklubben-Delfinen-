@@ -77,16 +77,15 @@ public class UserInterface {
                         System.out.println("HVILKE DISCIPLINER DELTAGER MEDLEMMET I\n1. " +
                                 "BUTTERFLY\n2. CRAWL\n3. RYGCRAWL\n4. BRYSTSVØMNING\n5. FÆRDIG");
                         boolean done = false;
-                        int choice1 = Integer.parseInt(scanner.nextLine());
                         while (!done) {
-                            switch (choice1) {
+                        int disciplineChoice = Integer.parseInt(scanner.nextLine());
+                            switch (disciplineChoice) {
                                 case 1 -> competitionSwimmer.addDisciplin(Discipline.BUTTERFLY);
                                 case 2 -> competitionSwimmer.addDisciplin(Discipline.CRAWL);
                                 case 3 -> competitionSwimmer.addDisciplin(Discipline.BACKSTROKE);
                                 case 4 -> competitionSwimmer.addDisciplin(Discipline.BREASTSTROKE);
                                 case 5 -> {
                                     done = true;
-                                    break;
                                 }
                                 default -> System.out.println("UGYLDIGT INPUT");
                             }
