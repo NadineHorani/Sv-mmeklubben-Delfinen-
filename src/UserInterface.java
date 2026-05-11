@@ -45,7 +45,11 @@ public class UserInterface {
     }
 
     private void formand() {
-        System.out.println("1. OPRET NYT MEDLEM\n" + "2. OPDATER MEDLEMSSTATUS\n3. SE ALLE MEDLEMMER");
+        System.out.println("""
+                1. OPRET NYT MEDLEM
+                2. OPDATER MEDLEMSSTATUS
+                3. SE ALLE MEDLEMMER
+                4. OPRET TRÆNER""");
         int choice = Integer.parseInt(scanner.nextLine());
         MemberType memberType;
         switch (choice) {
@@ -120,12 +124,26 @@ public class UserInterface {
 
             }
             case 3 -> System.out.println(club.showMembers());
+            case 4 -> {
+                System.out.println("INDTAST NAVN: ");
+                String name = scanner.nextLine();
+                System.out.println("TLFNUMMER: ");
+                String number = scanner.nextLine();
+                System.out.println("EMAIL: ");
+                String email = scanner.nextLine();
+                Coach coach = new Coach(name,number,email);
+                club.addCoach(coach);
+                System.out.println("TRÆNER OPRETTET\nNAVN: " + coach.getName() + "\nTRÆNER ID: " + coach.getCoachID());
+            }
             default -> System.out.println("UGYLDIGT INPUT");
         }
     }
 
     private void træner() {
-        System.out.println("1. REGISTRER TID\n" + "2. SE TOP 5");
+        System.out.println("""
+                1. REGISTRER TID
+                2. SE TOP 5
+                3. TILKNYT TRÆNER TIL KONKURRENCESVØMMER""");
         int choice = Integer.parseInt(scanner.nextLine());
         switch (choice) {
             case 1 -> {
@@ -168,9 +186,8 @@ public class UserInterface {
                         int day = Integer.parseInt(scanner.nextLine());
                         LocalDate date = LocalDate.of(year, month, day);
                         TrainingResult trainingResult = new TrainingResult(discipline, time, date);
-                        if (member instanceof CompetitionSwimmer swimmer) {
-                            swimmer.addTrainingResult(trainingResult);
-                        }
+                        CompetitionSwimmer swimmer = (CompetitionSwimmer) member;
+                        swimmer.addTrainingResult(trainingResult);
                         System.out.println("TRÆNINGSRESULTAT BLEV REGISTRERET KORREKT\n" + trainingResult);
                     }
                     case 2 -> {
@@ -228,6 +245,24 @@ public class UserInterface {
                 }
                 System.out.println(club.getTop5s(discipline, ageCategory));
             }
+            case 3 -> {
+                System.out.println("MEDLEMS ID: ");
+                int memberID = Integer.parseInt(scanner.nextLine());
+                Member swimmer = club.findMember(memberID);
+                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) swimmer;
+                System.out.println("TRÆNER ID: ");
+                int coachID = Integer.parseInt(scanner.nextLine());
+                Coach coach = club.findCoach(coachID);
+
+                if (coach != null && competitionSwimmer.getCoach() == null) {
+                    competitionSwimmer.addCoach(coach);
+                    coach.addSwimmer(competitionSwimmer);
+                    System.out.println("GENNEMFØRT");
+                } else {
+                    System.out.println("ENTEN FINDES TRÆNEREN IKKE I SYSTEMET, ELLERS HAR SVØMMEREN ALLEREDE EN TRÆNER");
+                    return;
+                }
+            }
         }
     }
 
@@ -241,7 +276,6 @@ public class UserInterface {
 
         switch (choice){
             case 1 -> {
-                Payment payment;
                 System.out.println("MEDELMS ID: ");
                 int id = Integer.parseInt(scanner.nextLine());
                 Member member = club.findMember(id);

@@ -26,6 +26,10 @@ public class CompetitionSwimmer extends Member {
         this.coach = coach;
     }
 
+    public Coach getCoach(){
+        return coach;
+    }
+
     @Override
     public String getName() {
         return super.getName();
