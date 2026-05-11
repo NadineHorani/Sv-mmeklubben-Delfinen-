@@ -13,9 +13,10 @@ public class CompetitionSwimmer extends Member {
     private ArrayList<CompetitionResult> competitionResults;
 
 
-    public CompetitionSwimmer (String name, String address, String email, String phoneNumber, int age, int memberId, MembershipStatus status,
+    public CompetitionSwimmer (String name, String address, String email, String phoneNumber, int age,
                                MemberType memberType){
         super(name, address, email, phoneNumber, age, memberType);
+
         this.disciplines = new ArrayList<>();
         this.trainingResults = new ArrayList<>();
         this.competitionResults = new ArrayList<>();
@@ -85,10 +86,10 @@ public class CompetitionSwimmer extends Member {
 
     public String toString(){
         return "COMPETITION SWIMMER: " +
-                "\n model.Coach: " + coach +
+                "\n Coach: " + coach +
                 "\n Disciplin: " + disciplines +
-                "\n model.TrainingResult: " + trainingResults +
-                "\n model.CompetitionResult: " + competitionResults;
+                "\n TrainingResult: " + trainingResults +
+                "\n CompetitionResult: " + competitionResults;
 
     }
 
