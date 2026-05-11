@@ -13,6 +13,7 @@ public class Payment {
         this.isPaid = false;
     }
 
+
     public Member getMember(){
         return member;
     }

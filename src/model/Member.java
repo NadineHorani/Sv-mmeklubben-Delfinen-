@@ -30,6 +30,10 @@ public class Member {
         this.memberType = memberType;
     }
 
+    public int getAge(){
+        return age;
+    }
+
     public int getMemberId(){
         return memberId;
     }
@@ -45,8 +49,9 @@ public class Member {
         return AgeCategory.JUNIOR;
     }
 
-
-
+    public MemberType getMemberType(){
+        return memberType;
+    }
 
     public MembershipStatus getStatus() {
         return status;
