@@ -1,26 +1,25 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Coach {
     private String name;
     private String phone;
     private String email;
     private int coachID;
-    private static int counter = 0;
-    private ArrayList<CompetitionSwimmer> swimmers;
+    private List<CompetitionSwimmer> swimmers;
 
 
     public String getName() {
         return name;
     }
 
-    public Coach(String name, String phone, String email){
-        counter++;
+    public Coach(String name, String phone, String email, int coachID){
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.coachID = counter;
+        this.coachID = coachID;
         this.swimmers = new ArrayList<>();
 
     }
