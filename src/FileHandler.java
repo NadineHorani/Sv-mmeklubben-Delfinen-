@@ -59,14 +59,6 @@ public class FileHandler {
         saveSwimResults(club);
     }
 
-    private void saveMembers(List<Member> members) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.csv"))) {
-            for (Member member : members) {
-                writer.write(printMember(member));
-                writer.newLine();
-            }
-        }
-    }
 
     //returnerer et member objekt pba. en linje i csv
     private Member parseMember(String text) {
@@ -100,6 +92,15 @@ public class FileHandler {
         }
     }
 
+    private void saveMembers(List<Member> members) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.csv"))) {
+            for (Member member : members) {
+                writer.write(printMember(member));
+                writer.newLine();
+            }
+        }
+    }
+
     private String printMember(Member member) {
         if (member instanceof CompetitionSwimmer swimmer) {
             return String.format("%s;%s;%s;%s;%d;%d;%s;%s;%s", member.getName(), member.getAddress(), member.getEmail(),
@@ -108,15 +109,6 @@ public class FileHandler {
         } else {
             return String.format("%s;%s;%s;%s;%d;%d;%s;%s", member.getName(), member.getAddress(), member.getEmail(),
                     member.getPhoneNumber(), member.getAge(), member.getMemberID(), member.getStatus(), member.getMemberType());
-        }
-    }
-
-    private void savePayments(List<Payment> payments) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("payments.csv"))) {
-            for (Payment p : payments) {
-                writer.write(printPayment(p));
-                writer.newLine();
-            }
         }
     }
 
@@ -136,8 +128,32 @@ public class FileHandler {
         return new Payment(member, isPaid);
     }
 
+    private void savePayments(List<Payment> payments) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("payments.csv"))) {
+            for (Payment p : payments) {
+                writer.write(printPayment(p));
+                writer.newLine();
+            }
+        }
+    }
+
     private String printPayment(Payment payment) {
         return String.format("%s;%s", payment.getMember().getMemberID(), payment.isPaid());
+    }
+
+    private SwimResult parseSwimResult(String text) {
+        String[] parts = text.split(";");
+        Discipline discipline = Discipline.valueOf(parts[0]);
+        double time = Double.parseDouble(parts[1]);
+        LocalDate date = LocalDate.parse(parts[2]);
+
+        if (parts.length > 3) {
+            String competetionName = parts[3];
+            int placement = Integer.parseInt(parts[4]);
+
+            return new CompetitionResult(discipline, time, date, competetionName, placement);
+        }
+        return new TrainingResult(discipline, time, date);
     }
 
     private void saveSwimResults(Club club) throws IOException {
@@ -160,21 +176,6 @@ public class FileHandler {
                 }
             }
         }
-    }
-
-    private SwimResult parseSwimResult(String text) {
-        String[] parts = text.split(";");
-        Discipline discipline = Discipline.valueOf(parts[0]);
-        double time = Double.parseDouble(parts[1]);
-        LocalDate date = LocalDate.parse(parts[2]);
-
-        if (parts.length > 3) {
-            String competetionName = parts[3];
-            int placement = Integer.parseInt(parts[4]);
-
-            return new CompetitionResult(discipline, time, date, competetionName, placement);
-        }
-        return new TrainingResult(discipline, time, date);
     }
 
     private String printSwimResult(SwimResult swimResult) {
