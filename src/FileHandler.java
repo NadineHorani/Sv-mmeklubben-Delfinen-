@@ -78,7 +78,7 @@ public class FileHandler {
             CompetitionSwimmer swimmer = new CompetitionSwimmer(name, address, email, phone, age, id,
                     status, type);
 
-            if (parts.length > 8 && !parts[8].isEmpty()) {
+            if (parts.length > 8 && !parts[8].isEmpty()) { //hvis disciplin data findes i linjen
                 String[] disciplines = parts[8].split(",");
                 for (String d : disciplines) {
                     swimmer.addDisciplin(Discipline.valueOf(d));
@@ -91,7 +91,7 @@ public class FileHandler {
             return new Member(name, address, email, phone, age, id, status, type);
         }
     }
-
+    //udskriver liste af members til csv
     private void saveMembers(List<Member> members) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.csv"))) {
             for (Member member : members) {
@@ -121,7 +121,7 @@ public class FileHandler {
         Member member = club.findMember(memberId);
 
         if (member == null) {
-            System.out.println("FEJL: Member med ID " + memberId + " findes ikke!");
+            System.out.println("FEJL i payments.csv: Ingen member med ID " + memberId + " fundet i systemet.");
             return null;
         }
 

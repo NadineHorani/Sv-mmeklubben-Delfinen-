@@ -99,9 +99,7 @@ public class Club {
     }
 
     public void registerPayment(int memberID) {
-
         for (Payment payment : payments) {
-
             if (payment.getMember().getMemberID() == memberID) {
                 payment.markAsPaid();
                 return;

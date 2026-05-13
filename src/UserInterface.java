@@ -62,6 +62,20 @@ public class UserInterface {
                 int age = getIntInput();
                 System.out.println("MEDLEMS ID: ");
                 int id = getIntInput();
+
+                boolean validID = false;
+                outer: // while-loop til ID validering. sikrer det samme id ikke bliver oprettet to gange
+                while (!validID) {
+                    for (Member member : club.getMembers()) {
+                        if (id == member.getMemberID()) {
+                            System.out.println("ID FINDES ALLEREDE. INDTAST ET NYT");
+                            id = getIntInput();
+                            continue outer;
+                        }
+                    }
+                    validID = true;
+                }
+
                 System.out.println("1. MOTIONIST\n2. KONKURRENCESVØMMER");
                 int answer = getIntInput();
                 while (true) {
