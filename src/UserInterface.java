@@ -69,9 +69,9 @@ public class UserInterface {
                         memberType = MemberType.MOTIONIST;
                         Member member = new Member(name, adress, email, phonenumber, age, id, memberType);
                         club.addMember(member);
-                        System.out.println("MEDLEM ER NU OPRETTET\n" + member + "\n");
                         Payment payment = new Payment(member);
                         club.addPayment(payment);
+                        System.out.println("MEDLEM ER NU OPRETTET\n" + member + "\n");
                         break;
                     } else if (answer == 2) {
                         memberType = MemberType.COMPETITION;
@@ -93,9 +93,9 @@ public class UserInterface {
                         }
 
                         club.addMember(competitionSwimmer);
-                        System.out.println("MEDLEM ER NU OPRETTET\n" + competitionSwimmer + "\n");
                         Payment payment = new Payment(competitionSwimmer);
                         club.addPayment(payment);
+                        System.out.println("MEDLEM ER NU OPRETTET\n" + competitionSwimmer + "\n");
                         break;
                     } else {
                         System.out.println("UGYLDIGT INPUT. PRØV IGEN");

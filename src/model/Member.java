@@ -98,7 +98,7 @@ public class Member {
         }
         if (age < 18) {
             return 1000;
-        } else if (age < 60) {
+        } else if (age < 61) {
             return 1600;
         }
         return 1200;     //for medlemmer over 60

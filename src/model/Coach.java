@@ -10,11 +10,6 @@ public class Coach {
     private int coachID;
     private List<CompetitionSwimmer> swimmers;
 
-
-    public String getName() {
-        return name;
-    }
-
     public Coach(String name, String phone, String email, int coachID){
         this.name = name;
         this.phone = phone;
@@ -22,6 +17,10 @@ public class Coach {
         this.coachID = coachID;
         this.swimmers = new ArrayList<>();
 
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getCoachID(){

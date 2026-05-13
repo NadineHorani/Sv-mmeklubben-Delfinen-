@@ -3,6 +3,7 @@ package model;
 import model.enums.Discipline;
 import model.enums.MemberType;
 import model.enums.MembershipStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,14 @@ public class CompetitionSwimmer extends Member {
         this.trainingResults = new ArrayList<>();
         this.competitionResults = new ArrayList<>();
     }
-           public CompetitionSwimmer(String name, String address, String email, String phoneNumber, int age, int memberID, MembershipStatus status,
-        MemberType memberType) {
-            super(name, address, email, phoneNumber, age, memberID, status, memberType);
 
-            this.disciplines = new ArrayList<>();
-            this.trainingResults = new ArrayList<>();
-            this.competitionResults = new ArrayList<>();
+    public CompetitionSwimmer(String name, String address, String email, String phoneNumber, int age, int memberID, MembershipStatus status,
+                              MemberType memberType) {
+        super(name, address, email, phoneNumber, age, memberID, status, memberType);
+
+        this.disciplines = new ArrayList<>();
+        this.trainingResults = new ArrayList<>();
+        this.competitionResults = new ArrayList<>();
     }
 
     public List<TrainingResult> getTrainingResults() {
@@ -37,11 +39,12 @@ public class CompetitionSwimmer extends Member {
     public List<CompetitionResult> getCompetitionResults() {
         return competitionResults;
     }
-    public String getDisciplinesAsString(){
+
+    public String getDisciplinesAsString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < disciplines.size(); i++){
+        for (int i = 0; i < disciplines.size(); i++) {
             sb.append(disciplines.get(i));
-            if (i < disciplines.size() - 1){
+            if (i < disciplines.size() - 1) {
                 sb.append(",");
             }
         }
