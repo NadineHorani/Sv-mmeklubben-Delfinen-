@@ -1,7 +1,6 @@
 package model;
 
 import model.enums.Discipline;
-
 import java.time.LocalDate;
 
 public class TrainingResult extends SwimResult {

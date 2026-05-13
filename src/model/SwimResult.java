@@ -1,7 +1,6 @@
 package model;
 
 import model.enums.Discipline;
-
 import java.time.LocalDate;
 
 public abstract class SwimResult implements Comparable <SwimResult> {

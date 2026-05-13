@@ -8,6 +8,11 @@ public class Payment {
     private boolean isPaid;
     private Member member;
 
+    public Payment(Member member, boolean isPaid) {
+        this.member = member;
+        this.isPaid = isPaid;
+    }
+
     public Payment(Member member) {
         this.member = member;
         this.isPaid = false;
@@ -23,10 +28,6 @@ public class Payment {
         this.paymentDate = LocalDate.now();
     }
 
-
-    public LocalDate getPaymentDate() {
-        return paymentDate;
-    }
 
     public boolean isPaid() {
         return isPaid;

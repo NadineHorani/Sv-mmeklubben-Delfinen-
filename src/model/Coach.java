@@ -1,16 +1,21 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Coach {
     private String name;
-    private int phone;
+    private String phone;
     private String email;
     private int coachID;
-    private ArrayList<CompetitionSwimmer> swimmers;
+    private List<CompetitionSwimmer> swimmers;
 
 
-    public Coach(String name, int phone, String email, int coachID){
+    public String getName() {
+        return name;
+    }
+
+    public Coach(String name, String phone, String email, int coachID){
         this.name = name;
         this.phone = phone;
         this.email = email;

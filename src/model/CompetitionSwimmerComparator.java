@@ -1,7 +1,6 @@
 package model;
 
 import model.enums.Discipline;
-
 import java.util.Comparator;
 
 public class CompetitionSwimmerComparator implements Comparator<CompetitionSwimmer> {

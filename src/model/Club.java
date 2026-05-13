@@ -2,16 +2,15 @@ package model;
 
 import model.enums.AgeCategory;
 import model.enums.Discipline;
-
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Club {
     private String name;
-    private ArrayList<Member> members;
-    private ArrayList<Coach> coaches;
-    private ArrayList<Payment> payments;
+    private List<Member> members;
+    private List<Coach> coaches;
+    private List<Payment> payments;
+
 
     public Club(String name) {
         this.name = name;
@@ -24,10 +23,9 @@ public class Club {
         members.add(member);
     }
 
-
     public Member findMember(int memberId) {
         for (Member m : members) {
-            if (m.getMemberId() == memberId) {
+            if (m.getMemberID() == memberId) {
                 return m;
             }
         }
@@ -52,12 +50,20 @@ public class Club {
         payments.add(payment);
     }
 
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
     public String showMembers() {
         StringBuilder sb = new StringBuilder();
         for (Member m : members) {
-            sb.append(m.getName()).append("\nID: ").append(m.getMemberId()).append("\nALDER: ").append
+            sb.append(m.getName()).append("\nID: ").append(m.getMemberID()).append("\nALDER: ").append
                             (m.getAge()).append("\nSTATUS: ").append(m.getStatus()).append("\nNIVEAU: ")
-                    .append(m.getMemberType()).append("\n\n");
+                    .append(m.getMemberType()).append("\n");
 
         }
         return sb.toString();
@@ -66,7 +72,7 @@ public class Club {
     public String getDebtors() {
         StringBuilder sb = new StringBuilder();
 
-        ArrayList<Member> debtors = new ArrayList<>();
+        List<Member> debtors = new ArrayList<>();
 
         for (Payment payment : payments) {
             if (!payment.isPaid()) {
@@ -74,11 +80,11 @@ public class Club {
             }
         }
 
-            for (Member m : debtors){
-                sb.append("MEDLEMSID: ").append(m.getMemberId()).append("\nNAVN: ").append(m.getName())
-                        .append("\nMANGLER AT BETALE: ").append(m.calculateFee()).append(" DKK\n\n");
+        for (Member m : debtors) {
+            sb.append("MEDLEMSID: ").append(m.getMemberID()).append("\nNAVN: ").append(m.getName())
+                    .append("\nMANGLER AT BETALE: ").append(m.calculateFee()).append(" DKK\n\n");
 
-            }
+        }
 
         return sb.toString();
     }
@@ -94,18 +100,17 @@ public class Club {
 
     public void registerPayment(int memberID) {
 
-            for (Payment payment : payments) {
+        for (Payment payment : payments) {
 
-                if (payment.getMember().getMemberId() == memberID) {
-                    payment.markAsPaid();
-                    return;
-                }
+            if (payment.getMember().getMemberID() == memberID) {
+                payment.markAsPaid();
+                return;
             }
         }
+    }
 
-
-    public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {
-        ArrayList<CompetitionSwimmer> competitionSwimmerArrayList = new ArrayList<>();
+    public List<CompetitionSwimmer> getCompetitionSwimmers() {
+        List<CompetitionSwimmer> competitionSwimmerArrayList = new ArrayList<>();
 
         for (Member member : members) {
             if (member instanceof CompetitionSwimmer) {
@@ -118,7 +123,7 @@ public class Club {
 
     public String getTop5s(Discipline discipline, AgeCategory category) {
         StringBuilder sb = new StringBuilder();
-        ArrayList<CompetitionSwimmer> result = new ArrayList<>();
+        List<CompetitionSwimmer> result = new ArrayList<>();
 
         for (CompetitionSwimmer s : getCompetitionSwimmers()) { //alle objekter der matcher agecategori og som
             if (s.getAgeCategory() == category &&  // har en personlig rekord i disciplinen bliver tilføjet til ny liste
@@ -132,7 +137,8 @@ public class Club {
         sb.append("TOP 5 ").append(discipline).append(" - ").append(category).append("\n___________________________\n");
 
         for (int i = 0; i < result.size() && i < 5; i++) {
-            sb.append(result.get(i).getName()).append(" ").append(result.get(i).getPersonalRecord(discipline)).append("\n");
+            sb.append(result.get(i).getName()).append(" ID: ").append(result.get(i).getMemberID()).append("\n").
+                    append(result.get(i).getPersonalRecord(discipline)).append("\n");
         }
 
         return sb.toString();

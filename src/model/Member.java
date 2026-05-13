@@ -4,38 +4,58 @@ import model.enums.AgeCategory;
 import model.enums.MemberType;
 import model.enums.MembershipStatus;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 public class Member {
     private String name;
     private String address;
     private String email;
     private String phoneNumber;
     private int age;
-    private int memberId;
-    private static int counter = 0;
+    private int memberID;
     private MembershipStatus status;
     private MemberType memberType;
 
-    public Member(String name, String address, String email, String phoneNumber, int age, MemberType memberType) {
-        counter++;
+    public Member(String name, String address, String email, String phoneNumber, int age, int memberID, MemberType memberType) {
         this.name = name;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
-        this.memberId = counter;
+        this.memberID = memberID;
         this.status = MembershipStatus.ACTIVE;
         this.memberType = memberType;
     }
 
+    public Member(String name, String address, String email, String phoneNumber,
+                  int age, int memberID, MembershipStatus status, MemberType memberType) {
+
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.memberID = memberID;
+        this.status = status;
+        this.memberType = memberType;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
     public int getAge(){
         return age;
     }
 
-    public int getMemberId(){
-        return memberId;
+    public int getMemberID(){
+        return memberID;
     }
 
     public String getName(){
@@ -96,8 +116,6 @@ public class Member {
                 
                 Age: %d
                 Membership Status: %s
-                Level: %s""", memberId, name, address, phoneNumber, email, age, status, memberType);
+                Level: %s""", memberID, name, address, phoneNumber, email, age, status, memberType);
     }
-
-
 }
