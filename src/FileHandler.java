@@ -30,6 +30,15 @@ public class FileHandler {
                 }
             }
         }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("coaches.csv"))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                Coach coach = parseCoach(line,club);
+                club.addCoach(coach);
+            }
+        }
+
         try (BufferedReader reader = new BufferedReader(new FileReader("swimresults.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -56,6 +65,7 @@ public class FileHandler {
     public void save(Club club) throws IOException {
         saveMembers(club.getMembers());
         savePayments(club.getPayments());
+        saveCoaches(club.getCoaches());
         saveSwimResults(club);
     }
 
@@ -91,6 +101,7 @@ public class FileHandler {
             return new Member(name, address, email, phone, age, id, status, type);
         }
     }
+
     //udskriver liste af members til csv
     private void saveMembers(List<Member> members) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("members.csv"))) {
@@ -184,5 +195,38 @@ public class FileHandler {
                     competitionResult.getName(), competitionResult.getPlacement());
         }
         return String.format("%s;%s;%s", swimResult.getDiscipline(), swimResult.getTime(), swimResult.getDate());
+    }
+
+    private Coach parseCoach(String text, Club club) {
+        String[] parts = text.split(";");
+        String name = parts[0];
+        String phone = parts[1];
+        String email = parts[2];
+        int coachID = Integer.parseInt(parts[3]);
+        if (parts[4].isEmpty() || parts[4].isBlank()) {
+            return new Coach(name, phone, email, coachID);
+        }
+
+        Coach coach = new Coach(name,phone,email,coachID);
+        String[] idparts = parts[4].split(",");
+        for (String idpart : idparts) {
+            CompetitionSwimmer swimmer = club.findCompetitionSwimmerById(Integer.parseInt(idpart));
+            coach.addSwimmer(swimmer);
+            swimmer.addCoach(coach);
+        }
+        return coach;
+    }
+
+    private void saveCoaches(List<Coach> coaches) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("coaches.csv"))) {
+            for (Coach c : coaches) {
+                writer.write(printCoach(c));
+                writer.newLine();
+            }
+        }
+    }
+
+    private String printCoach(Coach coach) {
+        return String.format("%s;%s;%s;%d;%s", coach.getName(), coach.getPhone(), coach.getEmail(), coach.getCoachID(), coach.getSwimmerIDsAsString());
     }
 }

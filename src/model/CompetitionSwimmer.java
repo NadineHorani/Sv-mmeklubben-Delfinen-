@@ -102,6 +102,14 @@ public class CompetitionSwimmer extends Member {
         return best;
     }
 
+    public String getCoachName() {
+        try {
+            return coach.getName();
+        } catch (NullPointerException NPE) {
+            return "INGEN TRÆNER";
+        }
+    }
+
 
     public String toString() {
         return "COMPETITION SWIMMER: " +

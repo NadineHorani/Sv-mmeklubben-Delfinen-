@@ -54,6 +54,10 @@ public class Club {
         return members;
     }
 
+    public List<Coach> getCoaches() {
+        return coaches;
+    }
+
     public List<Payment> getPayments() {
         return payments;
     }
@@ -61,9 +65,16 @@ public class Club {
     public String showMembers() {
         StringBuilder sb = new StringBuilder();
         for (Member m : members) {
+            if (!(m instanceof CompetitionSwimmer)){
             sb.append(m.getName()).append("\nID: ").append(m.getMemberID()).append("\nALDER: ").append
                             (m.getAge()).append("\nSTATUS: ").append(m.getStatus()).append("\nNIVEAU: ")
                     .append(m.getMemberType()).append("\n");
+            }
+            if (m instanceof CompetitionSwimmer swimmer){
+                sb.append(swimmer.getName()).append("\nID: ").append(swimmer.getMemberID()).append("\nALDER: ").append
+                                (swimmer.getAge()).append("\nSTATUS: ").append(swimmer.getStatus()).append("\nNIVEAU: ")
+                        .append(swimmer.getMemberType()).append("\nTRÆNER: ").append(swimmer.getCoachName()).append("\n");
+            }
 
         }
         return sb.toString();
@@ -81,9 +92,10 @@ public class Club {
         }
 
         for (Member m : debtors) {
-            sb.append("MEDLEMSID: ").append(m.getMemberID()).append("\nNAVN: ").append(m.getName())
-                    .append("\nMANGLER AT BETALE: ").append(m.calculateFee()).append(" DKK\n\n");
-
+            sb.append("MEDLEMSID: ").append(m.getMemberID()).append(" (").append(m.getStatus()).append(")")
+                    .append("\nNAVN: ").append(m.getName()).append(" (").append(m.getAgeCategory()).append(")").
+                    append("\nALDER: ").append(m.getAge())  .append("\nMANGLER AT BETALE: ").
+                    append(m.calculateFee()).append(" DKK\n\n");
         }
 
         return sb.toString();
@@ -142,8 +154,19 @@ public class Club {
         return sb.toString();
     }
 
+    public CompetitionSwimmer findCompetitionSwimmerById(int id){
+        for (Member m : members){
+            if (m instanceof CompetitionSwimmer swimmer && id == swimmer.getMemberID()){
+                return swimmer;
+            }
+        }
+        return null;
+    }
+
+
+
     public String toString() {
-        return "model.Club: " + name +
+        return "Club: " + name +
                 "\nMembers: " + members.size() +
                 "\nCoaches: " + coaches.size() +
                 "\nCompetition swimmers: " + getCompetitionSwimmers().size();

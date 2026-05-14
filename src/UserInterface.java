@@ -45,7 +45,8 @@ public class UserInterface {
                 1. OPRET NYT MEDLEM
                 2. OPDATER MEDLEMSSTATUS
                 3. SE ALLE MEDLEMMER
-                4. OPRET TRÆNER""");
+                4. OPRET TRÆNER
+                5. SE ALLE TRÆNERE""");
         int choice = getIntInput();
         MemberType memberType;
         switch (choice) {
@@ -148,11 +149,16 @@ public class UserInterface {
                 String number = scanner.nextLine();
                 System.out.println("EMAIL: ");
                 String email = scanner.nextLine();
-                System.out.println("MEDLEMS ID: ");
+                System.out.println("TRÆNER ID: ");
                 int id = getIntInput();
                 Coach coach = new Coach(name, number, email, id);
                 club.addCoach(coach);
                 System.out.println("TRÆNER OPRETTET\nNAVN: " + coach.getName() + "\nTRÆNER ID: " + coach.getCoachID());
+            }
+            case 5 -> {
+                for (Coach c : club.getCoaches()){
+                    System.out.println(c);
+                }
             }
             default -> System.out.println("UGYLDIGT INPUT");
         }
@@ -325,13 +331,10 @@ public class UserInterface {
             }
             case 2 -> System.out.println(club.getTotalExpectedFee() + " DKK");
 
-            case 3 -> {
-                System.out.println(club.getDebtors());
-            }
+            case 3 -> System.out.println(club.getDebtors());
 
             default -> System.out.println("UGYLDIGT INPUT");
         }
-
 
     }
 

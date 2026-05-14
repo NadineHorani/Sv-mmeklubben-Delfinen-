@@ -10,43 +10,61 @@ public class Coach {
     private int coachID;
     private List<CompetitionSwimmer> swimmers;
 
-    public Coach(String name, String phone, String email, int coachID){
+    public Coach(String name, String phone, String email, int coachID) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.coachID = coachID;
         this.swimmers = new ArrayList<>();
-
     }
 
     public String getName() {
         return name;
     }
 
-    public int getCoachID(){
+    public int getCoachID() {
         return coachID;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
-    public void addSwimmer(CompetitionSwimmer swimmer){
+    public String getPhone(){
+        return phone;
+    }
+
+
+    public void addSwimmer(CompetitionSwimmer swimmer) {
         swimmers.add(swimmer);
     }
 
-    public void removeSwimmer(CompetitionSwimmer swimmer){
+    public void removeSwimmer(CompetitionSwimmer swimmer) {
         swimmers.remove(swimmer);
     }
 
-    public String toString(){
-        return "COACH" +
-                "\n Name: " + name +
-                "\n Phone number: " + phone +
-                "\n Email: " + email +
-                "\n model.Coach ID: " + coachID +
-                "\n Swimmers: " + swimmers;
+
+    public String getSwimmerIDsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < swimmers.size(); i++) {
+            sb.append(swimmers.get(i).getMemberID());
+            if (i < swimmers.size() - 1){
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 
 
-
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getName()).append(" (TRÆNER ID: ").append(this.getCoachID()).append(")");
+        sb.append("\nTILKNYTTEDE SVØMMERE\n-----------------------\n");
+        for (CompetitionSwimmer swimmer : swimmers){
+            sb.append(swimmer.getName()).append(" (MEDLEMS ID: ").append(swimmer.getMemberID()).append(")\n");
+        }
+        return sb.toString();
+    }
 
 
 }
