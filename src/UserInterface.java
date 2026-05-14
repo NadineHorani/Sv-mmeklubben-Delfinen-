@@ -65,7 +65,8 @@ public class UserInterface {
                 int id = getIntInput();
 
                 boolean validID = false;
-                outer: // while-loop til ID validering. sikrer det samme id ikke bliver oprettet to gange
+                outer:
+                // while-loop til ID validering. sikrer det samme id ikke bliver oprettet to gange
                 while (!validID) {
                     for (Member member : club.getMembers()) {
                         if (id == member.getMemberID()) {
@@ -156,7 +157,7 @@ public class UserInterface {
                 System.out.println("TRÆNER OPRETTET\nNAVN: " + coach.getName() + "\nTRÆNER ID: " + coach.getCoachID());
             }
             case 5 -> {
-                for (Coach c : club.getCoaches()){
+                for (Coach c : club.getCoaches()) {
                     System.out.println(c);
                 }
             }
@@ -195,50 +196,20 @@ public class UserInterface {
                 int choice1 = getIntInput();
                 switch (choice1) {
                     case 1 -> {
-                        Discipline discipline = null;
-                        System.out.println("1. BUTTERFLY\n2. CRAWL\n3. RYGCRAWL\n4. BRYSTSVØMNING");
-                        int choice2 = getIntInput();
-                        switch (choice2) {
-                            case 1 -> discipline = Discipline.BUTTERFLY;
-                            case 2 -> discipline = Discipline.CRAWL;
-                            case 3 -> discipline = Discipline.BACKSTROKE;
-                            case 4 -> discipline = Discipline.BREASTSTROKE;
-                        }
+                        Discipline discipline = chooseDiscipline();
                         System.out.println("INDTAST TIDSRESULTAT I SEKUNDER: ");
                         int time = getIntInput();
-                        System.out.println("INDTAST DATO I TALFORMAT");
-                        System.out.println("ÅR: ");
-                        int year = getIntInput();
-                        System.out.println("MÅNED: ");
-                        int month = getIntInput();
-                        System.out.println("DAG: ");
-                        int day = getIntInput();
-                        LocalDate date = LocalDate.of(year, month, day);
+                        LocalDate date = getLocalDate();
                         TrainingResult trainingResult = new TrainingResult(discipline, time, date);
                         CompetitionSwimmer swimmer = (CompetitionSwimmer) member;
                         swimmer.addTrainingResult(trainingResult);
                         System.out.println("TRÆNINGSRESULTAT BLEV REGISTRERET KORREKT\n" + trainingResult);
                     }
                     case 2 -> {
-                        Discipline discipline = null;
-                        System.out.println("1. BUTTERFLY\n2. CRAWL\n3. RYGCRAWL\n4. BRYSTSVØMNING");
-                        int choice2 = getIntInput();
-                        switch (choice2) {
-                            case 1 -> discipline = Discipline.BUTTERFLY;
-                            case 2 -> discipline = Discipline.CRAWL;
-                            case 3 -> discipline = Discipline.BACKSTROKE;
-                            case 4 -> discipline = Discipline.BREASTSTROKE;
-                        }
+                        Discipline discipline = chooseDiscipline();
                         System.out.println("INDTAST TIDSRESULTAT I SEKUNDER: ");
                         int time = getIntInput();
-                        System.out.println("INDTAST DATO I TALFORMAT");
-                        System.out.println("ÅR: ");
-                        int year = getIntInput();
-                        System.out.println("MÅNED: ");
-                        int month = getIntInput();
-                        System.out.println("DAG: ");
-                        int day = getIntInput();
-                        LocalDate date = LocalDate.of(year, month, day);
+                        LocalDate date = getLocalDate();
                         System.out.println("STÆVNE NAVN: ");
                         String competetionName = scanner.nextLine();
                         System.out.println("PLACERING PÅ RANGLISTE: ");
@@ -261,16 +232,7 @@ public class UserInterface {
                     default -> System.out.println("UGYLDIGT INPUT");
                 }
 
-                Discipline discipline = null;
-                System.out.println("1. BUTTERFLY\n2. CRAWL\n3. RYGCRAWL\n4. BRYSTSVØMNING");
-                int choice3 = getIntInput();
-                switch (choice3) {
-                    case 1 -> discipline = Discipline.BUTTERFLY;
-                    case 2 -> discipline = Discipline.CRAWL;
-                    case 3 -> discipline = Discipline.BACKSTROKE;
-                    case 4 -> discipline = Discipline.BREASTSTROKE;
-                    default -> System.out.println("UGYLDIGT INPUT");
-                }
+                Discipline discipline = chooseDiscipline();
                 System.out.println(club.getTop5s(discipline, ageCategory));
             }
             case 3 -> {
@@ -338,7 +300,7 @@ public class UserInterface {
 
     }
 
-    private int getIntInput() {
+    private int getIntInput() {  //extracted metode for at ungå dubletter
         while (true) {
             try {
                 return Integer.parseInt(scanner.nextLine());
@@ -347,4 +309,38 @@ public class UserInterface {
             }
         }
     }
+
+    private LocalDate getLocalDate() {
+        System.out.println("INDTAST DATO I TALFORMAT");
+        System.out.println("ÅR: ");
+        int year = getIntInput();
+        System.out.println("MÅNED: ");
+        int month = getIntInput();
+        System.out.println("DAG: ");
+        int day = getIntInput();
+        return LocalDate.of(year, month, day);
+    }
+
+    private Discipline chooseDiscipline() { //extracted metode for at ungå dubletter
+        System.out.println("1. BUTTERFLY\n2. CRAWL\n3. RYGCRAWL\n4. BRYSTSVØMNING");
+        while (true) {
+            int choice = getIntInput();
+            switch (choice) {
+                case 1 -> {
+                    return Discipline.BUTTERFLY;
+                }
+                case 2 -> {
+                    return Discipline.CRAWL;
+                }
+                case 3 -> {
+                    return Discipline.BACKSTROKE;
+                }
+                case 4 -> {
+                    return Discipline.BREASTSTROKE;
+                }
+                default -> System.out.println("UGYLDIGT INPUT");
+            }
+        }
+    }
+
 }
