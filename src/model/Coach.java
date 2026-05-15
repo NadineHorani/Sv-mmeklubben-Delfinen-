@@ -39,11 +39,6 @@ public class Coach {
         swimmers.add(swimmer);
     }
 
-    public void removeSwimmer(CompetitionSwimmer swimmer) {
-        swimmers.remove(swimmer);
-    }
-
-
     public String getSwimmerIDsAsString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < swimmers.size(); i++) {

@@ -60,11 +60,6 @@ public class CompetitionSwimmer extends Member {
         return coach;
     }
 
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
     public void addDisciplin(Discipline discipline) {
         if (!disciplines.contains(discipline)) {
             disciplines.add(discipline);
