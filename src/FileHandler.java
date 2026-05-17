@@ -31,10 +31,10 @@ public class FileHandler {
             }
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("coaches.csv"))){
+        try (BufferedReader reader = new BufferedReader(new FileReader("coaches.csv"))) {
             String line;
-            while ((line = reader.readLine()) != null){
-                Coach coach = parseCoach(line,club);
+            while ((line = reader.readLine()) != null) {
+                Coach coach = parseCoach(line, club);
                 club.addCoach(coach);
             }
         }
@@ -48,9 +48,9 @@ public class FileHandler {
                 int memberId = Integer.parseInt(parts[0]);
                 SwimResult result = parseSwimResult(parts[1]);
 
-                Member m = club.findMember(memberId);
+                CompetitionSwimmer swimmer = club.findCompetitionSwimmerById(memberId);
 
-                if (m instanceof CompetitionSwimmer swimmer) {
+                if (swimmer != null) {
 
                     if (result instanceof TrainingResult tr) {
                         swimmer.addTrainingResult(tr);
@@ -207,7 +207,7 @@ public class FileHandler {
             return new Coach(name, phone, email, coachID);
         }
 
-        Coach coach = new Coach(name,phone,email,coachID);
+        Coach coach = new Coach(name, phone, email, coachID);
         String[] idparts = parts[4].split(",");
         for (String idpart : idparts) {
             CompetitionSwimmer swimmer = club.findCompetitionSwimmerById(Integer.parseInt(idpart));
